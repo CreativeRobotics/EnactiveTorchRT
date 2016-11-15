@@ -1,0 +1,19 @@
+Forward Design Changes Report
+-----------------------------
+
+Report File:        D:\Dropbox\DesignSpark\Projects\EnactiveTorch\ET4_0\SensorHead_SharpIR1 (PCB - Forward Design Changes Report).txt
+Report Written:     Thursday, October 13, 2016
+Project Path:       D:\Dropbox\DesignSpark\Projects\EnactiveTorch\ET4_0\SensorHead_SharpIR1.prj
+Design Path:        D:\Dropbox\DesignSpark\Projects\EnactiveTorch\ET4_0\SensorHead_SharpIR1.pcb
+Design Title:       
+Created:            01/09/2016 15:29:36
+Last Saved:         07/10/2016 14:14:13
+Editing Time:       1492 min
+Units:              mm (precision 4)
+
+Connected pin "U1-3" to net "N0007".
+Connected pin "U1-2" to net "GND".
+Connected pin "U1-1" to net "N0009".
+
+
+End Of Report.

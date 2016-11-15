@@ -1,0 +1,15 @@
+Transfer from Schematic to PCB.
+-------------------------------
+
+Report File:        C:\Documents and Settings\Bill\My Documents\Dropbox\DesignSpark\Projects\EnactiveTorch\ET4_0\ET4 (PCB - Transfer from Schematic to PCB.).txt
+Report Written:     Wednesday, October 07, 2015
+Design Path:        C:\Documents and Settings\Bill\My Documents\Dropbox\DesignSpark\Projects\EnactiveTorch\ET4_0\ET4.pcb
+Design Title:       
+Created:            07/10/2015 22:48:44
+Last Saved:         07/10/2015 22:49:13
+Editing Time:       0 min
+Units:              mm (precision 4)
+
+Net class "3_3V" was not defined, but has been created. Please check the values in the PCB design.
+
+End Of Report.

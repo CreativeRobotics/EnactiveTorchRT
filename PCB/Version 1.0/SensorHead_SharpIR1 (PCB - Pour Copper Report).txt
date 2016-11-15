@@ -1,0 +1,15 @@
+Pour Copper Report
+------------------
+
+Report File:        D:\Dropbox\DesignSpark\Projects\EnactiveTorch\ET4_0\SensorHead_SharpIR1 (PCB - Pour Copper Report).txt
+Report Written:     Thursday, September 08, 2016
+Project Path:       D:\Dropbox\DesignSpark\Projects\EnactiveTorch\ET4_0\SensorHead_SharpIR1.prj
+Design Path:        D:\Dropbox\DesignSpark\Projects\EnactiveTorch\ET4_0\SensorHead_SharpIR1.pcb
+Design Title:       
+Created:            01/09/2016 15:29:36
+Last Saved:         08/09/2016 22:03:04
+Editing Time:       428 min
+Units:              mm (precision 4)
+
+
+End Of Report.

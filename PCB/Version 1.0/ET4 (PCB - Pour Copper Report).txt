@@ -1,0 +1,15 @@
+Pour Copper Report
+------------------
+
+Report File:        D:\Dropbox\DesignSpark\Projects\EnactiveTorch\ET4_0\ET4 (PCB - Pour Copper Report).txt
+Report Written:     Thursday, September 08, 2016
+Project Path:       D:\Dropbox\DesignSpark\Projects\EnactiveTorch\ET4_0\ET4.prj
+Design Path:        D:\Dropbox\DesignSpark\Projects\EnactiveTorch\ET4_0\ET4.pcb
+Design Title:       
+Created:            07/10/2015 22:48:44
+Last Saved:         08/09/2016 22:13:54
+Editing Time:       2715 min
+Units:              mm (precision 4)
+
+
+End Of Report.

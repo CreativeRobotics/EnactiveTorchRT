@@ -1,0 +1,65 @@
+Design Rule Check Report
+------------------------
+
+Report File:        D:\Dropbox\DesignSpark\Projects\EnactiveTorch\ET4_0\ET4 (PCB - Design Rule Check Report).txt
+Report Written:     Thursday, September 08, 2016
+Project Path:       D:\Dropbox\DesignSpark\Projects\EnactiveTorch\ET4_0\ET4.prj
+Design Path:        D:\Dropbox\DesignSpark\Projects\EnactiveTorch\ET4_0\ET4.pcb
+Design Title:       
+Created:            07/10/2015 22:48:44
+Last Saved:         08/09/2016 22:14:56
+Editing Time:       2716 min
+Units:              mm (precision 4)
+
+
+Results
+=======
+
+
+No errors found
+
+
+Settings
+========
+
+
+Spacings
+
+=========
+
+Tracks        No
+Pads and Vias Yes
+Shapes        No
+Text          No
+Board         No
+Drills        No
+Components    No
+
+
+Manufacturing
+
+==============
+
+Drill Breakout                  No
+Drill Backoff                   No
+Silkscreen Overlap              No
+Copper Text In Board            Yes
+Min Track Width                 Yes
+Min Annular Ring                Yes
+Min Paste Size                  Yes
+Vias In Pads                    Yes
+Unplated Vias                   Yes
+Unplated Pads With Inner Tracks Yes
+
+
+Nets
+
+=====
+
+Net Completion               No
+Dangling Tracks              No
+Net Track Length Differences No
+
+
+
+End Of Report.
