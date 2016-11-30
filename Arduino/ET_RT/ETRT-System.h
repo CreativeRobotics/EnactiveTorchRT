@@ -108,10 +108,6 @@ class ETRTSystem{
 	void initialise();
 	void initialiseImu(int32_t gbx, int32_t gby, int32_t gbz, int32_t abx, int32_t aby, int32_t abz);
 	void update(); //update the whole system
-	
-	//void startBluetooth()		{Serial1.begin(BLUETOOTH_SPEED);}
-	
-	//void startUSB()		{Serial.begin(USB_SPEED);}
 	void setLed1(bool state);
 	void setLed2(bool State);
 	
@@ -122,7 +118,7 @@ class ETRTSystem{
 	
 	bool isButtonPressed()						{return !digitalRead(userButton_pin);}
 	bool getSwitchState()						{return digitalRead(selectSwitch_pin);}
-	bool getBluetoothState()				{return digitalRead(btStatus_pin);}
+	bool getBluetoothState()				{return !digitalRead(btStatus_pin);}
 	void beep(int pitch, int duration)	{tone(audioOut_pin, pitch, duration);}
 	void enableLra1()								{digitalWrite(LRA1EN_pin, 1);}
 	void disableLra1()							{digitalWrite(LRA1EN_pin, 0);}

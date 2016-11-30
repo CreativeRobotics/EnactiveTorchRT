@@ -20,7 +20,7 @@ void ETRTSystem::initialise(){
 	Timer1.pwm(LRA1PWM_pin, 0);
 	Timer1.pwm(LRA2PWM_pin, 0);
 	delay(100);
-	printDeviceInfo();
+	
 }
 
 void  ETRTSystem::initialiseImu(int32_t gbx, int32_t gby, int32_t gbz, int32_t abx, int32_t aby, int32_t abz){
