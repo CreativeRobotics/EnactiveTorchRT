@@ -143,7 +143,7 @@ class ETRTSystem{
 	MPU9250 imu;
 	
 	uint8_t dataStreamType = QuaternionData;
-	int printDelay 							= 100;
+	//int printDelay 							= 100;
 	bool dataStreamEnable 			= 0;
 	int declination 						= 0.0; //-1.28 For creative Robotics	
 	uint8_t floatPrecision 			= 3;
