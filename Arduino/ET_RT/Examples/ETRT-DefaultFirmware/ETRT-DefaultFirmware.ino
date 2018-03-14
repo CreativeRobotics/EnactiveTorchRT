@@ -41,14 +41,20 @@ ETRTSystem et;
 
 //---------------------------------------
 
+//milliseconds between data packets - set to 50 for a 50ms delay, equal to a rate of 20Hz
+//Set to 10 for a 10ms delay, equal to 100Hz
+const int printDelay = 50;
+
+//Specifies the floating point precision when printing data. 3 = 3 decimal places.
+const int dataPrecision = 3;
+
+uint16_t lraIntensity1 = 0;
+uint16_t lraIntensity2 = 0;
+//used when mapping range to repeated pulses of the haptic actuator
 const int delayBetweenPulses = 50;
 bool pulseState = 0;
 long int nextChange = 0;
-const int printDelay = 50; //50ms between data packets
 long int nextPrint = 0;
-const int dataPrecision = 3; //print floating point data with three deciml places
-
-
 uint16_t vibIntensity = 0;
 uint16_t vibStep = 8;
 long int nextPulse = 0;
@@ -72,27 +78,43 @@ void setup() {
   nextPrint = millis();
   nextPulse = millis();
 }
-
+//------------------------------------------------------------------------------------------
+//Main Loop!
 void loop() {
   et.update();
   mySensor.update();
+
+  //Only activate the haptics if the user button is pressed, if not then set them to zero.
   if(et.isButtonPressed())  setHaptics();
   else{
     et.setLra1(0);
     et.setLra2(0);
   }
+  //Send a data packet if streaming is enabled.
+  //The printData() function will only send data if enough time has elapsed - this is set with the printDelay variable
   if(et.dataStreamEnable == true) printData();
+  //light the user LED if the bluetooth radio indicates that it is connected.
   et.setLed2(et.getBluetoothState());
+  delay(1);//1ms delay
 }
 
+//------------------------------------------------------------------------------------------
 void setHaptics(){
   //map the sensor to the haptic actuator
   //If switch is in state 1 use pulses
   //Otherwise use continuous
+
+  /* LRA1 - this is the internal haptic actuator. If you plug in an external actuator to the haptic actuator 1 socket (front socket) it will disable the internal actuator (
+   * LRA2 - This is the second, external actuator that plugs into the haptic Actuator 2 socket (rear socket)
+   */
   if(et.getSwitchState()) updatePulseIntensityMode(); //pulse them on and off at 0.5hz with intensity set by sensor
   else {
-    et.setLra1(map(mySensor.getRange(), 0, RANGEFINDER_MAX, 0, LRA_MAX)); //map the sensor (0-RANGEFINDER_MAX) to the haptics (0-LRA_MAX_DUTY)
-    et.setLra2(map(mySensor.getRange(), 0, RANGEFINDER_MAX, 0, LRA_MAX)); //map the sensor (0-RANGEFINDER_MAX) to the haptics (0-LRA_MAX_DUTY)
+    //Sensor mapping - this uses the Arduino standard map() function.
+    //This is a linear mapping between 0 and the maximum rangefinder value, and 0 and the maximum haptic intensity.
+    lraIntensity1 = map(mySensor.getRange(), 0, RANGEFINDER_MAX, 0, LRA_MAX);//map the sensor (0-RANGEFINDER_MAX) to the haptics (0-LRA_MAX_DUTY)
+    lraIntensity2 = map(mySensor.getRange(), 0, RANGEFINDER_MAX, 0, LRA_MAX);//map the sensor (0-RANGEFINDER_MAX) to the haptics (0-LRA_MAX_DUTY)
+    et.setLra1(lraIntensity1); 
+    et.setLra2(lraIntensity2);
   }
 }
 
@@ -124,16 +146,19 @@ void printData(){
    nextPrint = millis()+printDelay; //set the new elapsed time for printing
   //print the IMU data first - these are as comma seperated values, each begins with a character marking the type of data
   if(et.dataStreamType == RawData){
-    Bluetooth.write('r');
+    Bluetooth.write("r,");
     et.printIMURawData();
   }else if(et.dataStreamType == YPRData){
-    Bluetooth.write('y');
+    Bluetooth.write("y,");
     et.printIMUYPRData();
   }else{
-    Bluetooth.write('q');
+    Bluetooth.write("q,");
     et.printIMUQuaternionData();
   }
   Bluetooth.write(','); //comma
-  Bluetooth.println( (float)mySensor.getRange(), 1); //cast as float with 1DP and send a line feed/character return for end of packet
+  Bluetooth.print( (float)mySensor.getRange(), 1); 
+  Bluetooth.write(','); //comma
+  
+  Bluetooth.println(lraIntensity1);//send haptic intensity and a line feed/character return for end of packet
 }
   
