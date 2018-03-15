@@ -6,7 +6,6 @@
 
 ETRTRangefinderS1 mySensor;
 ETRTSystem et;
-
 //Gyro and accelerometer calibration values - these can be obtained using the calibration sketch
 //et01
 
@@ -58,6 +57,8 @@ long int nextPrint = 0;
 uint16_t vibIntensity = 0;
 uint16_t vibStep = 8;
 long int nextPulse = 0;
+long int iterations = 0;
+
 void setup() {
   // put your setup code here, to run once:
   //initialise the et then the IMU with the gyro and accelerometer calibration values for this device
@@ -77,6 +78,7 @@ void setup() {
   nextChange = millis();
   nextPrint = millis();
   nextPulse = millis();
+
 }
 //------------------------------------------------------------------------------------------
 //Main Loop!
@@ -141,24 +143,33 @@ void updatePulseFrequencyMode(){
    et.pulseLra1(LRA_MAX, 50); //this returns straight away and updates in the background
 }
 
+//Uncomment this to include an iterative count at the end of each data packet
+//#define PRINT_ITERATIONS
 void printData(){
    if(millis() < nextPrint) return; //not enough time has passed
    nextPrint = millis()+printDelay; //set the new elapsed time for printing
   //print the IMU data first - these are as comma seperated values, each begins with a character marking the type of data
   if(et.dataStreamType == RawData){
-    Bluetooth.write("r,");
+    Bluetooth.print("r,");
     et.printIMURawData();
   }else if(et.dataStreamType == YPRData){
-    Bluetooth.write("y,");
+    Bluetooth.print("y,");
     et.printIMUYPRData();
   }else{
-    Bluetooth.write("q,");
+    Bluetooth.print("q,");
     et.printIMUQuaternionData();
   }
   Bluetooth.write(','); //comma
   Bluetooth.print( (float)mySensor.getRange(), 1); 
   Bluetooth.write(','); //comma
+  Bluetooth.print(lraIntensity1);//send haptic intensity and a line feed/character return for end of packet
   
-  Bluetooth.println(lraIntensity1);//send haptic intensity and a line feed/character return for end of packet
+  #ifdef PRINT_ITERATIONS
+    Bluetooth.write(','); //comma
+    Bluetooth.print(iterations); //comma
+  #endif
+  
+  Bluetooth.println();
+  iterations++;
 }
   
