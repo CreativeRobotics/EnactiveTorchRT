@@ -1,3 +1,8 @@
+/*
+ * Enactive Torch RT Version 1.0
+ * Default firmware version 1.3
+ */
+
 #include <ETRT-MPU9250.h>
 #include <ETRT-System.h>
 #include <ETRT-RangefinderS1.h>
