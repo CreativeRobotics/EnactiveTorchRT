@@ -94,7 +94,7 @@ enum lraState{
 const uint8_t LRA_RESPONSE = 30; //minimum time for LRA response
 const uint8_t LRA_OVERDRIVE = 128; //ammount of PWM to overdrive the LRA when starting
 const uint16_t LRA_MAX = 1023; //maxumum PWM value
-const uint16_t LRA_MIN = 544; //minimum PWM needed to start LRA
+const uint16_t LRA_MIN = 512; //minimum PWM needed to start LRA - a 50% duty cycle -- was 544?
 static volatile bool imuNewDataflag = 0;  
 static volatile uint16_t imuIntTotal = 0;
 

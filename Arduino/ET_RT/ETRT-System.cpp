@@ -85,19 +85,10 @@ void  ETRTSystem::setLra1(uint16_t intensity){
 	nextLra1Update = millis()+LRA_RESPONSE; //set the next minimum time between updates
 	//Map intensity (0-1023) to viable WM (512-1023)
 	lra1Duty = map(intensity, 0, 1023, LRA_MIN, LRA_MAX);//(intensity/2)+LRA_MIN;
-	/*if(lra1Duty == LRA_MIN){
-		Timer1.setPwmDuty(LRA1PWM_pin, 0);
-		disableLra1();
-	}
-	else{
-		enableLra1();
-		Timer1.setPwmDuty(LRA1PWM_pin, constrain(lra1Duty, 0, LRA_MAX));
-	}
-	return;*/
 	
 	//activate brake if intensity is zero, or exit of lra is already off
-	if(lra1State == LraOff && lra1Duty == LRA_MIN) return; //do nothing if everything is off
-	else if(lra1Duty == LRA_MIN){
+	if(lra1State == LraOff && lra1Duty <= LRA_MIN) return; //do nothing if everything is off
+	else if(lra1Duty <= LRA_MIN){
 		Timer1.setPwmDuty(LRA1PWM_pin, 0); //zero PWM
 		lra1State = LraBraking; ////set state to braking
 	}
@@ -127,17 +118,19 @@ void  ETRTSystem::setLra1(uint16_t intensity){
 void  ETRTSystem::setLra2(uint16_t intensity){
 	if(millis() < nextLra2Update) return; //prevent updates happening too fast
 	nextLra2Update = millis()+LRA_RESPONSE; //set the next minimum time between updates
+	//Map intensity (0-1023) to viable WM (512-1023)
+	lra2Duty = map(intensity, 0, 1023, LRA_MIN, LRA_MAX);//(intensity/2)+LRA_MIN;
+
+	
 	//activate brake if intensity is zero, or exit of lra is already off
-	lra2Duty = intensity;
-	if(lra2State == LraOff && lra2Duty == 0) return; //do nothing if everything is off
-	else if(lra2Duty == 0){
+	if(lra2State == LraOff && lra2Duty <= LRA_MIN) return; //do nothing if everything is off
+	else if(lra2Duty <= LRA_MIN){
 		Timer1.setPwmDuty(LRA2PWM_pin, 0); //zero PWM
 		lra2State = LraBraking; ////set state to braking
 	}
 	else{
 		switch(lra2State){
-			case LraOff: //do nothing if new value is zero
-				//enable the device then set the duty cycle with overdrive and change the state
+			case LraOff: //enable the device then set the duty cycle with overdrive and change the state
 				enableLra2();
 				Timer1.setPwmDuty(LRA2PWM_pin, constrain(lra2Duty+LRA_OVERDRIVE, 0, LRA_MAX));
 				lra2State = LraOverdriving;

@@ -14,12 +14,12 @@ ETRTSystem et;
 //Gyro and accelerometer calibration values - these can be obtained using the calibration sketch
 //et01
 
-#define GYRO_X_BIAS -94
-#define GYRO_Y_BIAS 28
-#define GYRO_Z_BIAS 306
-#define ACC_X_BIAS  -94
-#define ACC_Y_BIAS  131
-#define ACC_Z_BIAS  -529
+#define GYRO_X_BIAS 84
+#define GYRO_Y_BIAS 44
+#define GYRO_Z_BIAS -18
+#define ACC_X_BIAS  84
+#define ACC_Y_BIAS  306
+#define ACC_Z_BIAS  -178
 
 //et02
 /*
@@ -38,6 +38,14 @@ ETRTSystem et;
 #define ACC_X_BIAS  646
 #define ACC_Y_BIAS  -164
 #define ACC_Z_BIAS  2555
+
+ET-05
+#define GYRO_X_BIAS 84
+#define GYRO_Y_BIAS 44
+#define GYRO_Z_BIAS -18
+#define ACC_X_BIAS  84
+#define ACC_Y_BIAS  306
+#define ACC_Z_BIAS  -178
 */
 
 
@@ -69,7 +77,7 @@ void setup() {
   //initialise the et then the IMU with the gyro and accelerometer calibration values for this device
   et.initialise();
   et.initialiseImu(GYRO_X_BIAS, GYRO_Y_BIAS, GYRO_Z_BIAS, ACC_X_BIAS, ACC_Y_BIAS, ACC_Z_BIAS);
-  et.declination = -1.28; //use to get accurate orientation with respect to world coordinates (using the magnetometer).
+  et.declination = 6.26; //use to get accurate orientation with respect to world coordinates (using the magnetometer).
                           //Use http://www.ngdc.noaa.gov/geomag-web/#declination to get one for wherever you are or ignore to use default zero
   et.beep(2000, 500);
   et.printDeviceInfo();
@@ -92,10 +100,14 @@ void loop() {
   mySensor.update();
 
   //Only activate the haptics if the user button is pressed, if not then set them to zero.
-  if(et.isButtonPressed())  setHaptics();
+  if(et.isButtonPressed())  {
+    setHaptics();
+    //mySensor.setLed(255);
+  }
   else{
     et.setLra1(0);
     et.setLra2(0);
+    //mySensor.setLed(0);
   }
   //Send a data packet if streaming is enabled.
   //The printData() function will only send data if enough time has elapsed - this is set with the printDelay variable
