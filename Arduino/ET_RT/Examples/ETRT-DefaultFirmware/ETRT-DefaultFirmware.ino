@@ -1,9 +1,10 @@
 /*
- * Enactive Torch RT Version 1.0
- * Default firmware version 1.3
+ * Enactive Torch RT Version 1.0.2
+ * Default firmware version 1.4
  */
 
 #include <ETRT-MPU9250.h>
+#include "calibration.h"
 #include <ETRT-System.h>
 #include <ETRT-RangefinderS1.h>
 
@@ -11,45 +12,7 @@
 
 ETRTRangefinderS1 mySensor;
 ETRTSystem et;
-//Gyro and accelerometer calibration values - these can be obtained using the calibration sketch
-//et01
 
-#define GYRO_X_BIAS 84
-#define GYRO_Y_BIAS 44
-#define GYRO_Z_BIAS -18
-#define ACC_X_BIAS  84
-#define ACC_Y_BIAS  306
-#define ACC_Z_BIAS  -178
-
-//et02
-/*
-#define GYRO_X_BIAS 95
-#define GYRO_Y_BIAS -97
-#define GYRO_Z_BIAS -22
-#define ACC_X_BIAS  95
-#define ACC_Y_BIAS  99
-#define ACC_Z_BIAS  482
-*/
-
-/*/et03
-#define GYRO_X_BIAS 646
-#define GYRO_Y_BIAS 409
-#define GYRO_Z_BIAS -786
-#define ACC_X_BIAS  646
-#define ACC_Y_BIAS  -164
-#define ACC_Z_BIAS  2555
-
-ET-05
-#define GYRO_X_BIAS 84
-#define GYRO_Y_BIAS 44
-#define GYRO_Z_BIAS -18
-#define ACC_X_BIAS  84
-#define ACC_Y_BIAS  306
-#define ACC_Z_BIAS  -178
-*/
-
-
-#define GRAVITY 16384
 
 //---------------------------------------
 
@@ -67,8 +30,8 @@ const int delayBetweenPulses = 50;
 bool pulseState = 0;
 long int nextChange = 0;
 long int nextPrint = 0;
-uint16_t vibIntensity = 0;
-uint16_t vibStep = 8;
+//uint16_t vibIntensity = 0;
+//uint16_t vibStep = 8;
 long int nextPulse = 0;
 long int iterations = 0;
 
